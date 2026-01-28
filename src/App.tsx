@@ -1,25 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { createContext, ChangeEvent, useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/Home/HomePage";
+import { ContactUs } from "./pages/ContactUs/ContactUsPage";
+import { Profile } from "./pages/User/Profile";
+import ProductsPage from "./pages/Products/ProductsPage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+export interface AppContextType {
+  username: string;
+  setUsername: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const AppContext = createContext<AppContextType | undefined>(undefined);
 
 function App() {
+  const client  = new QueryClient();
+
+  const [username, setUsername] = useState<string>("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <QueryClientProvider client={client}>
+           <AppContext.Provider value={{ username, setUsername }}>
+              <Routes>
+                <Route path="/" element={<HomePage />}>
+                  Home
+                </Route>
+                <Route path="/HomePage" element={<HomePage />}>
+                  HomePage
+                </Route>
+                <Route path="/ContactUs" element={<ContactUs />}>
+                  ContactUs
+                </Route>
+                <Route path="/Profile" element={<Profile />}>
+                  Profile
+                </Route>
+                <Route path="/Products" element={<ProductsPage />}>
+                  Products
+                </Route>
+              </Routes>
+        </AppContext.Provider>
+        </QueryClientProvider>
+      </div>
+    </>
   );
 }
 
