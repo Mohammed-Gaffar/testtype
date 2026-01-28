@@ -9,9 +9,9 @@ export default function ProductsPage() {
   const context = useContext(AppContext);
   if (!context)
       throw new Error("ProductsPage must be used inside AppContext.Provider");
-  const {username} = context;
 
-    
+
+  const {username} = context;
 
   //============= using useeffect ====================================================
 
