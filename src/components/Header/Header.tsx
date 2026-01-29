@@ -13,11 +13,9 @@ export function Header(props : HeaderProps) {
     <div className={"Header"}>
       <>
        <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
-      <a className="navbar-brand fw-bold" href="#">
+      <a className="navbar-brand fw-bold" href="/">
         MyApp
       </a>
-
-
 
       <button   
         className="navbar-toggler"
