@@ -17,7 +17,9 @@ export function Header(props : HeaderProps) {
         MyApp
       </a>
 
-      <button
+
+
+      <button   
         className="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
