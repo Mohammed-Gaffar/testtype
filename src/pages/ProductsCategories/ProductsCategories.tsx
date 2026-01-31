@@ -1,11 +1,16 @@
-import React from "react";
+import React, { ChangeEvent, MouseEvent, useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ProductsCategoriesInterface } from "../../interfaces/productsCategoriesInterface";
 import axios from "axios";
 import { Header } from "../../components";
 import { Link } from "react-router-dom";
+import { AppContext } from "../../App";
+
 
 export default function ProductsCategories() {
+
+  const  Contextvalues = useContext(AppContext)
+
   const {
     data: productsCategories = [],
     isLoading,
@@ -19,6 +24,13 @@ export default function ProductsCategories() {
       return response.data as ProductsCategoriesInterface[];
     },
   });
+
+  const setcategory = (e: MouseEvent<HTMLAnchorElement>) => {
+    const category = e.currentTarget.getAttribute("data-category");
+    Contextvalues?.setSelectedCategory(category || "");
+    
+    console.log("Selected Category:", category);
+  };
 
   return (
     <>
@@ -62,8 +74,10 @@ export default function ProductsCategories() {
                     <p className="text-muted small">
                       Explore products in this category
                     </p>
-
+                    
                     <Link
+                      data-category={category.name}
+                      onClick={(e) => setcategory(e)}
                       to={`/ProductsCategories/${category.name}`}
                       className="btn btn-primary mt-3"
                     >
