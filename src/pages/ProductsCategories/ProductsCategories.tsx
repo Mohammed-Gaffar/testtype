@@ -94,3 +94,7 @@ export default function ProductsCategories() {
     </>
   );
 }
+
+// Sample Data Structure for productsCategories
+
+
